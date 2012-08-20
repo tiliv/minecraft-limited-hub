@@ -1,0 +1,8 @@
+# Some boilerplate
+.tm_properties
+.DS_Store
+*.pyc
+*.pyo
+
+# Local environment
+local_settings.py
