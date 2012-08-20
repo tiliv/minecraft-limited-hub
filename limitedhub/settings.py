@@ -118,8 +118,12 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
     
+    # Reusable apps
     'south',
     'taggit',
+    
+    # Project apps
+    'limitedhub.server',
 )
 
 # A sample logging configuration. The only tangible logging
