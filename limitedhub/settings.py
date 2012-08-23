@@ -93,6 +93,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
+    'social_auth.middleware.SocialAuthExceptionMiddleware',
 )
 
 ROOT_URLCONF = 'limitedhub.urls'
@@ -121,6 +123,7 @@ INSTALLED_APPS = (
     # Reusable apps
     'south',
     'taggit',
+    'social_auth',
     
     # Project apps
     'limitedhub.server',
@@ -155,4 +158,79 @@ LOGGING = {
     }
 }
 
+
+# django-social-auth features
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.twitter.TwitterBackend',
+    # 'social_auth.backends.facebook.FacebookBackend',
+    # 'social_auth.backends.google.GoogleOAuthBackend',
+    # 'social_auth.backends.google.GoogleOAuth2Backend',
+    # 'social_auth.backends.google.GoogleBackend',
+    # 'social_auth.backends.yahoo.YahooBackend',
+    # 'social_auth.backends.browserid.BrowserIDBackend',
+    # 'social_auth.backends.contrib.linkedin.LinkedinBackend',
+    # 'social_auth.backends.contrib.livejournal.LiveJournalBackend',
+    # 'social_auth.backends.contrib.orkut.OrkutBackend',
+    # 'social_auth.backends.contrib.foursquare.FoursquareBackend',
+    # 'social_auth.backends.contrib.github.GithubBackend',
+    # 'social_auth.backends.contrib.vkontakte.VKontakteBackend',
+    # 'social_auth.backends.contrib.live.LiveBackend',
+    # 'social_auth.backends.contrib.skyrock.SkyrockBackend',
+    # 'social_auth.backends.contrib.yahoo.YahooOAuthBackend',
+    # 'social_auth.backends.OpenIDBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+TWITTER_CONSUMER_KEY         = 'WbUVXpj0WXamVUERc8fsqw'
+TWITTER_CONSUMER_SECRET      = 'uHgwFgWVhV3SDUTtRbHvSbwI4s5pd619tjUHSNd7CEQ'
+# FACEBOOK_APP_ID              = ''
+# FACEBOOK_API_SECRET          = ''
+# LINKEDIN_CONSUMER_KEY        = ''
+# LINKEDIN_CONSUMER_SECRET     = ''
+# ORKUT_CONSUMER_KEY           = ''
+# ORKUT_CONSUMER_SECRET        = ''
+# GOOGLE_CONSUMER_KEY          = ''
+# GOOGLE_CONSUMER_SECRET       = ''
+# GOOGLE_OAUTH2_CLIENT_ID      = ''
+# GOOGLE_OAUTH2_CLIENT_SECRET  = ''
+# FOURSQUARE_CONSUMER_KEY      = ''
+# FOURSQUARE_CONSUMER_SECRET   = ''
+# VK_APP_ID                    = ''
+# VK_API_SECRET                = ''
+# LIVE_CLIENT_ID               = ''
+# LIVE_CLIENT_SECRET           = ''
+# SKYROCK_CONSUMER_KEY         = ''
+# SKYROCK_CONSUMER_SECRET      = ''
+# YAHOO_CONSUMER_KEY           = ''
+# YAHOO_CONSUMER_SECRET        = ''
+
+LOGIN_URL = '/login-form/'
+LOGIN_REDIRECT_URL = '/logged-in/'
+LOGIN_ERROR_URL = '/login-error/'
+
+SOCIAL_AUTH_COMPLETE_URL_NAME  = 'socialauth_complete'
+SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
+SOCIAL_AUTH_DEFAULT_USERNAME = 'New User'
+SOCIAL_AUTH_EXPIRATION = 'expires'
+SOCIAL_AUTH_RAISE_EXCEPTIONS = DEBUG
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    # Defaults
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+    
+    # New processors
+    'social_auth.context_processors.social_auth_by_name_backends',
+    # 'social_auth.context_processors.social_auth_backends',
+    # 'social_auth.context_processors.social_auth_by_type_backends',
+    'social_auth.context_processors.social_auth_login_redirect',
+)
+
+
+# Consult local settings
 from local_settings import *

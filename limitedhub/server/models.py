@@ -2,12 +2,6 @@ from django.db import models
 
 from taggit.managers import TaggableManager
 
-# class GameMode(models.Model):
-#     name = models.CharField(max_length=100, blank=False, \
-#             help_text="Minecraft game type name.")
-#     description = models.CharField(max_length=200, blank=False, \
-#             help_text="Simple mode description.")
-# 
 class Server(models.Model):
     name = models.CharField(max_length=200, blank=False, \
             help_text="Server name")
@@ -19,4 +13,9 @@ class Server(models.Model):
     # Through the use of standard tag names, the game details can be communicated for easy search and directory features.
     tags = TaggableManager()
     
-
+    class Meta:
+        ordering = ('name',)
+    
+    def __unicode__(self):
+        return self.name
+    
